@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Human Heart</title>
+
+  <!-- Favicon (Inline Heart SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D62839'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Three.js & OrbitControls for Interactive 3D Rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+
+<!-- ========== NAVIGATION HEADER (Left Menu) ========== -->
+<header class="navbar">
+  <div class="nav-left">
+    <button id="menuBtn" class="menu-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="sidebar">
+      <span class="menu-icon">&#9776;</span>
+      <span class="menu-text">Menu</span>
+    </button>
+    <a href="#home" class="logo">The Human <span>Heart</span></a>
+  </div>
+</header>
+
+<!-- ========== INTERACTIVE POP-OUT SIDEBAR ========== -->
+<div id="sidebarOverlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+<aside id="sidebar" class="sidebar left" aria-label="Main Navigation">
+  <div class="sidebar-header">
+    <span class="sidebar-title">Menu</span>
+    <button id="closeSidebarBtn" class="close-btn" aria-label="Close navigation menu">&times;</button>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="#home">Home</a>
+    <a href="#introduction">Introduction</a>
+    <a href="#anatomy">Anatomy</a>
+    <a href="#chambers">Chambers</a>
+    <a href="#valves">Valves</a>
+    <a href="#circulation">Circulation</a>
+    <a href="#cardiac-cycle">Cardiac Cycle</a>
+    <a href="#electrical-system">Electrical System</a>
+    <a href="#calculator">Calculator</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#glossary">Glossary</a>
+    <a href="#references">References</a>
+    <a href="#contact">Author Contact</a>
+    <a href="#introduction" class="button small">Start Learning</a>
+  </nav>
+</aside>
+
+<main>
+<!-- ========== HERO WITH INTERACTIVE 3D HEART ========== -->
+<section id="home" class="hero">
+  <div>
+    <p class="label">AN INTERACTIVE LEARNING GUIDE</p>
+    <h1>The Human Heart</h1>
+    <h2>The Engine Behind Every Beat.</h2>
+    <p>Explore the remarkable organ that keeps the body alive. Discover its anatomy, follow the journey of blood, and understand the electrical signals that coordinate every heartbeat.</p>
+    <div class="hero-actions">
+      <a class="button" href="#anatomy">Explore Anatomy</a>
+      <a class="button outline" href="#cardiac-cycle">Cardiac Cycle</a>
+    </div>
+    <div class="facts">
+      <div class="card"><b>4</b> chambers</div>
+      <div class="card"><b>2</b> circulations</div>
+      <div class="card"><b>60–100</b> beats/min at rest (typical adult range)</div>
+    </div>
+  </div>
+
+  <figure class="heart-box">
+    <div id="heart3d-container" role="region" aria-label="Interactive 3D model of the human heart">
+      <div class="viewer-tag">Interactive 3D Model</div>
+      <div class="viewer-instructions">Drag to rotate &bull; Scroll to zoom</div>
+      <div class="viewer-controls">
+        <button id="toggleBeatBtn" class="viewer-btn" title="Toggle heart beat animation">Pulse: On</button>
+        <button id="resetViewBtn" class="viewer-btn" title="Reset 3D camera orientation">Reset View</button>
+      </div>
+    </div>
+    <figcaption>Anatomical 3D Model: Rotate 360&deg; to inspect the ventricles, aortic arch, pulmonary trunk, vena cava, and coronary vessels.</figcaption>
+  </figure>
+</section>
+
+<!-- ========== INTRODUCTION ========== -->
+<section id="introduction" class="section">
+  <h2>Understanding the Human Heart</h2>
+  <p>The heart is a hollow muscular organ, roughly the size of a closed fist. It sits in the <b>mediastinum</b>, the middle compartment of the chest, between the lungs and tilted slightly to the left.</p>
+  <p>It works as a <b>double pump</b>. The right side sends oxygen-poor blood to the lungs (<b>pulmonary circulation</b>). The left side sends oxygen-rich blood to the rest of the body (<b>systemic circulation</b>). Each heartbeat is a coordinated squeeze that keeps blood moving in one direction.</p>
+</section>
+
+<!-- ========== EXTERNAL ANATOMY ========== -->
+<section id="anatomy" class="section">
+  <h2>External Anatomy</h2>
+  <div class="grid">
+    <div class="card"><h3>Apex</h3><p>The pointed lower tip, formed by the left ventricle.</p></div>
+    <div class="card"><h3>Base</h3><p>The back surface where the big vessels attach; mostly the left atrium.</p></div>
+    <div class="card"><h3>Coronary sulcus</h3><p>A groove between the atria and ventricles that holds coronary vessels.</p></div>
+    <div class="card"><h3>Interventricular sulci</h3><p>Front and back grooves marking the boundary between the two ventricles.</p></div>
+  </div>
+</section>
+
+<!-- ========== CHAMBERS ========== -->
+<section id="chambers" class="section">
+  <h2>Four Chambers. One Coordinated Pump.</h2>
+  <div class="grid">
+    <div class="card"><h3>Right atrium</h3><p>Receives oxygen-poor blood from the body through the superior and inferior venae cavae.</p></div>
+    <div class="card"><h3>Right ventricle</h3><p>Pumps oxygen-poor blood through the pulmonary valve to the lungs.</p></div>
+    <div class="card"><h3>Left atrium</h3><p>Receives oxygen-rich blood from the lungs through the pulmonary veins.</p></div>
+    <div class="card"><h3>Left ventricle</h3><p>Pumps oxygen-rich blood through the aortic valve into the aorta.</p></div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Feature</th><th>Right side</th><th>Left side</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Blood carried</td><td>Oxygen-poor</td><td>Oxygen-rich</td></tr>
+        <tr><td>Sends blood to</td><td>Lungs</td><td>Body</td></tr>
+        <tr><td>Ventricle wall</td><td>Thinner</td><td>Thicker</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">The left ventricle's wall is thicker because it must create higher pressure to push blood around the whole body.</p>
+</section>
+
+<!-- ========== VALVES ========== -->
+<section id="valves" class="section">
+  <h2>The Four Heart Valves</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Valve</th><th>Type</th><th>Location</th><th>Opens during</th><th>Closes during</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Tricuspid</td><td>Atrioventricular</td><td>Right atrium &rarr; right ventricle</td><td>Ventricular filling</td><td>Ventricular contraction</td></tr>
+        <tr><td>Pulmonary</td><td>Semilunar</td><td>Right ventricle &rarr; pulmonary trunk</td><td>Ejection</td><td>Ventricular relaxation</td></tr>
+        <tr><td>Mitral</td><td>Atrioventricular</td><td>Left atrium &rarr; left ventricle</td><td>Ventricular filling</td><td>Ventricular contraction</td></tr>
+        <tr><td>Aortic</td><td>Semilunar</td><td>Left ventricle &rarr; aorta</td><td>Ejection</td><td>Ventricular relaxation</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Valves do not contract. Blood pressure pushes them open going forward, and pushes them shut if blood tries to flow backward.</p>
+</section>
+
+<!-- ========== CIRCULATION (Options On The Left) ========== -->
+<section id="circulation" class="section">
+  <h2>Follow the Journey of Blood</h2>
+  <div class="button-group left">
+    <button class="button" id="pulmonaryBtn">Pulmonary Circulation</button>
+    <button class="button outline" id="systemicBtn">Systemic Circulation</button>
+  </div>
+  <ol class="steps" id="steps">
+    <li>Body tissues</li>
+    <li>Venae cavae</li>
+    <li>Right atrium</li>
+    <li>Tricuspid valve</li>
+    <li>Right ventricle</li>
+    <li>Pulmonary valve</li>
+    <li>Pulmonary arteries</li>
+    <li>Lungs</li>
+    <li>Pulmonary veins</li>
+    <li>Left atrium</li>
+    <li>Mitral valve</li>
+    <li>Left ventricle</li>
+    <li>Aortic valve</li>
+    <li>Aorta</li>
+  </ol>
+  <p id="circText" class="card">Choose a pathway to highlight its route.</p>
+  <p class="note">Arteries carry blood <i>away</i> from the heart and veins carry it <i>toward</i> the heart. That is why pulmonary arteries carry oxygen-poor blood and pulmonary veins carry oxygen-rich blood. (Red and blue are only teaching colours; blood is never blue.)</p>
+</section>
+
+<!-- ========== CARDIAC CYCLE (Options On The Right) ========== -->
+<section id="cardiac-cycle" class="section">
+  <h2>Inside Every Heartbeat</h2>
+  <p><b>Systole</b> means contraction and <b>diastole</b> means relaxation. In real life these steps overlap, so this is a simplified guide.</p>
+  <div class="card">
+    <p class="label" id="phaseNumber"></p>
+    <h3 id="phaseTitle"></h3>
+    <p id="phaseText"></p>
+    <p><span class="badge" id="avValves"></span> <span class="badge" id="slValves"></span></p>
+    <div class="button-group right">
+      <button class="button outline" id="prevBtn">Previous</button>
+      <button class="button" id="playBtn">Play</button>
+      <button class="button outline" id="nextBtn">Next</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ELECTRICAL SYSTEM ========== -->
+<section id="electrical-system" class="section">
+  <h2>The Electrical System Behind Every Beat</h2>
+  <ol>
+    <li>The <b>sinoatrial (SA) node</b> normally starts each beat.</li>
+    <li>The signal spreads across both atria, which contract.</li>
+    <li>The <b>atrioventricular (AV) node</b> slows the signal briefly so the ventricles can fill.</li>
+    <li>The signal travels down the <b>bundle of His</b>.</li>
+    <li>It splits into the <b>right and left bundle branches</b>.</li>
+    <li><b>Purkinje fibres</b> spread it quickly through the ventricles, which contract.</li>
+  </ol>
+  <p>An <b>ECG</b> records this electrical activity (not the force of the heartbeat). The P wave is the atria activating, the QRS complex is the ventricles activating, and the T wave is the ventricles recovering.</p>
+  <svg viewBox="0 0 400 100" class="ecg" role="img" aria-label="Illustrative ECG wave with P, QRS and T labels">
+    <polyline fill="none" stroke="#D62839" stroke-width="2.5" points="0,60 60,60 70,50 80,60 110,60 118,66 125,15 133,80 140,60 175,60 200,40 225,60 400,60"/>
+    <g fill="#6B7280" font-size="11"><text x="68" y="44">P</text><text x="120" y="10">QRS</text><text x="198" y="34">T</text></g>
+  </svg>
+  <p class="note">Illustration only, not a real patient's ECG. Reading ECGs needs clinical training.</p>
+</section>
+
+<!-- ========== CALCULATOR (Options On The Right) ========== -->
+<section id="calculator" class="section">
+  <h2>Calculate Cardiac Output</h2>
+  <p>Cardiac output = heart rate &times; stroke volume.</p>
+  <div class="card">
+    <label for="hr">Heart rate (beats/min)</label>
+    <input id="hr" type="number" min="1" max="250" value="72">
+    <label for="sv">Stroke volume (mL/beat)</label>
+    <input id="sv" type="number" min="1" max="250" value="70">
+    <div class="button-group right">
+      <button class="button outline" id="resetBtn">Reset</button>
+      <button class="button" id="calcBtn">Calculate</button>
+    </div>
+    <p id="result"></p>
+  </div>
+</section>
+
+<!-- ========== QUIZ (Options On The Right) ========== -->
+<section id="quiz" class="section">
+  <h2>Test Your Cardiac Knowledge</h2>
+  <div class="card" id="quizBox"></div>
+</section>
+
+<!-- ========== GLOSSARY ========== -->
+<section id="glossary" class="section">
+  <h2>Glossary</h2>
+  <label for="search">Search a term</label>
+  <input id="search" type="search" placeholder="e.g. systole">
+  <dl id="glossaryList"></dl>
+  <p id="noResults" hidden>No matching terms found.</p>
+</section>
+
+<!-- ========== REFERENCES ========== -->
+<section id="references" class="section">
+  <h2>References</h2>
+  <ul>
+    <li><a href="https://openstax.org/details/books/anatomy-and-physiology-2e" target="_blank" rel="noopener">OpenStax: Anatomy and Physiology 2e</a></li>
+    <li><a href="https://www.nhlbi.nih.gov/health/heart" target="_blank" rel="noopener">NHLBI: Heart health</a></li>
+  </ul>
+  <p class="note">All diagrams and models are original. This site is for learning only and is not medical advice.</p>
+</section>
+</main>
+
+<!-- ========== FOOTER & AUTHOR CONTACT ========== -->
+<footer id="contact">
+  <p class="logo">The Human <span>Heart</span></p>
+  <p>Every Beat Tells a Story.</p>
+
+  <div class="author-card">
+    <span class="author-badge">Author & Medical Writer</span>
+    <h3 class="author-name">Olasugba Oluwamayowa</h3>
+    <p class="author-bio">Physiology Researcher & Medical Content Creator</p>
+    
+    <div class="author-links">
+      <a href="mailto:mayowaolasugba@gmail.com" class="author-link" aria-label="Send an Email">
+        <span>✉</span> Email
+      </a>
+      <a href="https://github.com/Marvelbyte" target="_blank" rel="noopener noreferrer" class="author-link" aria-label="GitHub Profile">
+        <span>⌥</span> GitHub
+      </a>
+      <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="author-link" aria-label="LinkedIn Profile">
+        <span>in</span> LinkedIn
+      </a>
+      <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="author-link" aria-label="Twitter / X Profile">
+        <span>𝕏</span> Twitter / X
+      </a>
+    </div>
+  </div>
+
+  <p class="copyright">&copy; <span id="year"></span> The Human Heart &bull; <a href="#references">References</a></p>
+
+  <!-- Centered Back to Top Button -->
+  <div class="back-to-top-wrap">
+    <a href="#home" class="button small">Back to Top &uarr;</a>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
